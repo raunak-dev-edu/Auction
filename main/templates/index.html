@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h2>Active Biddings</h2>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="message">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    <div id="activelist">
+    {% for list in a1 %}
+    <div class = "card">
+        <p class="title">{{list.title}}</p>
+        {% if list.image_url %}
+            <img src="{{ list.image_url }}" class="list_img">
+        {% else %}
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png" alt="No image Provided" class="list_img">
+        {% endif %}
+
+        <p class="c_price">Starting Bid :-  &#8377;  {{ list.starting_bid }} </p>
+        <p class="s_time"> Starting Time :-  {{ list.start_time }} </p>
+        <p class="e_time"> Ending Time :-  {{ list.end_time }} </p>
+
+        {% if list.active_bool == True %}
+        <form method="post" action="{% url 'bid' %}">
+            {% csrf_token %}
+            <input name= "bid_amnt" placeholder = "Bid Amount" type = "number">
+            <button class="btn btn-outline-primary" type = "submit" name = "list_id" value = {{ list.id }} >Bid Item</button>
+            </form>
+        {% endif %}
+        {% if list.active_bool == False %}
+        <span>ITEM SOLD !</span>
+        <p class="winner">Winner =  {{ winner }} </p>
+        {% endif %}
+    </div>  
+    {% endfor %}
+    </div>
+      
+<style>
+h2{
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px #f0ff04, 0 0 10px #0047ff;
+}
+p{
+    color: antiquewhite;
+}
+#activelist{
+    margin-top: 4vw;
+    grid-gap: 2vw;
+    display:grid;
+    width: 90%;
+    margin-left: 5%;
+    grid-template-rows: repeat(auto,1fr);
+    grid-template-columns: 1fr 1fr 1fr;
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+}
+.card{
+    display: grid;
+    grid-template-rows: repeat(auto,1fr);
+    grid-template-columns: 1fr;
+    width: 90%;
+    margin-left: 5%;
+    background-color: #060730;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    border-radius: 10px;
+    border: solid 2px #125857;
+    padding: 20px 0px;
+    margin-bottom: 25px;
+}
+.card:hover{
+    box-shadow: rgb(255 160 122 / 35%) 0px 5px 15px;
+    border-radius: 10px;
+}
+img{
+    width: 220px;
+    height: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+.title{
+
+    font-size: 2vw;
+    font-weight: bold;
+}
+.c_price{
+    font-weight: bold;
+    margin-top: 1vw;
+}
+.s_time{
+    font-weight: bold;
+
+}
+.e_time{
+    font-weight: bold;
+}
+.winner{
+    font-weight: bold;
+    color: #9fffa5;
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+
+span{
+    color:red;
+    font-weight: bold;
+    letter-spacing: 2px;
+ }
+
+</style>
+
+
+
+{% endblock %}
+
+

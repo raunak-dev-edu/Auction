@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h2>Register</h2>
+
+    {% if message %}
+        <div><h4><strong>{{ message }}</h4></srong></div>
+    {% endif %}
+
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+
+    <span>Already have an account?</span> <a href="{% url 'login' %}">Log In here.</a>
+
+    <style>
+        span{
+            font-size: 15px;
+            color: white;
+        }
+        h2{
+            color: white;
+            text-shadow: 1px 1px 2px black, 0 0 25px #f0ff04, 0 0 10px #0047ff;
+        }
+        h4{
+            color: red;
+            background-color: #ffdfdf;
+            font-family: 'Merriweather', serif;
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 0px 300px;
+        }
+        .form-group{
+            margin: 20px 200px;
+        }
+        </style>
+{% endblock %}
