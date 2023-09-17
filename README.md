@@ -10,6 +10,10 @@ All the CRUD operations done by django admin :-
 * password = "auction"
 ---
 ## Webiste look:
+### Demo Video-
+https://github.com/raunak-dev-edu/Auction/assets/95216822/87e38c3b-51a3-485a-9e12-e9b6a73a6e4c
+
+### Snapshot -
 ![Screenshot (174)](https://user-images.githubusercontent.com/95216822/207617599-82ea6910-3641-446b-95b7-3d7edfe08463.png)  
 ---
 ---
